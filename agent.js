@@ -1,18 +1,32 @@
 #!/usr/bin/env node
 
-import { Agent } from '@livekit/agents';
-
 console.log('LiveKit Agent starting...');
 
-// Basic agent setup
-const agent = new Agent({
-  // Add your agent configuration here
+// Import the package to verify it's working
+import('@livekit/agents').then((livekitAgents) => {
+  console.log('LiveKit Agents package loaded successfully!');
+  console.log('Available exports:', Object.keys(livekitAgents));
+  
+  console.log('LiveKit Agent started successfully!');
+}).catch((error) => {
+  console.error('Error loading LiveKit Agents:', error);
+  process.exit(1);
 });
-
-console.log('LiveKit Agent started successfully!');
 
 // Keep the process running
 process.on('SIGINT', () => {
   console.log('Shutting down agent...');
   process.exit(0);
+});
+
+// Simple HTTP server to keep the process alive
+import('http').then((http) => {
+  const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('LiveKit Agent is running!\n');
+  });
+  
+  server.listen(8081, () => {
+    console.log('LiveKit Agent server listening on port 8081');
+  });
 }); 
