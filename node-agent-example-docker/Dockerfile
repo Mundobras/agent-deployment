@@ -2,7 +2,7 @@
 # syntax=docker/dockerfile:1
 FROM node:20-slim AS base
 
-WORKDIR /app/node-agent-example-docker
+WORKDIR /app
 
 RUN npm install -g pnpm@9.7.0
 
@@ -10,7 +10,7 @@ RUN npm install -g pnpm@9.7.0
 FROM base AS build
 
 RUN apt-get update -qq && apt-get install --no-install-recommends -y ca-certificates
-COPY --link ./node-agent-example-docker /app/node-agent-example-docker
+COPY --link ./node-agent-example-docker/ /app/
 
 RUN pnpm install --frozen-lockfile
 RUN npm run build
