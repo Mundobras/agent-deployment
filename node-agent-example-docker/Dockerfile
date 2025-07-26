@@ -1,4 +1,3 @@
-# this is an example Dockerfile that builds a minimal container for running LK Agents
 # syntax=docker/dockerfile:1
 FROM node:20-slim AS base
 
@@ -10,16 +9,17 @@ RUN npm install -g pnpm@9.7.0
 FROM base AS build
 
 RUN apt-get update -qq && apt-get install --no-install-recommends -y ca-certificates
+
+# ✅ Aqui está o segredo: copiar o conteúdo da pasta, não a pasta
 COPY --link ./node-agent-example-docker/ /app/
 
 RUN pnpm install --frozen-lockfile
 RUN npm run build
 
 FROM base
-COPY --from=build /app/node-agent-example-docker /app
+COPY --from=build /app /app
 COPY --from=build /etc/ssl/certs /etc/ssl/certs
 
-# start the server by default, this can be overwritten at runtime
 EXPOSE 8081
 
 CMD [ "node", "./dist/agent.js", "start" ]
