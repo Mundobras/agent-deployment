@@ -16,7 +16,7 @@ RUN pnpm install --frozen-lockfile
 RUN npm run build
 
 FROM base
-COPY --from=build /app /app
+COPY --from=build /app/node-agent-example-docker /app
 COPY --from=build /etc/ssl/certs /etc/ssl/certs
 
 # start the server by default, this can be overwritten at runtime
