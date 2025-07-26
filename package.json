@@ -1,0 +1,11 @@
+{
+  "name": "livekit-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "echo \"No build step defined\""
+  },
+  "dependencies": {
+    "@livekit/agent": "^0.0.7"
+  }
+}
