@@ -2,7 +2,7 @@
 # syntax=docker/dockerfile:1
 FROM node:20-slim AS base
 
-WORKDIR /app
+WORKDIR /app/node-agent-example-docker
 
 RUN npm install -g pnpm@9.7.0
 
