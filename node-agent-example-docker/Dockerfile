@@ -10,7 +10,7 @@ RUN npm install -g pnpm@9.7.0
 FROM base AS build
 
 RUN apt-get update -qq && apt-get install --no-install-recommends -y ca-certificates
-COPY --link . .
+COPY --link ./node-agent-example-docker /app/node-agent-example-docker
 
 RUN pnpm install --frozen-lockfile
 RUN npm run build
