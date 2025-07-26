@@ -10,8 +10,8 @@ FROM base AS build
 
 RUN apt-get update -qq && apt-get install --no-install-recommends -y ca-certificates
 
-# ✅ Aqui está o segredo: copiar o conteúdo da pasta, não a pasta
-COPY --link ./node-agent-example-docker/ /app/
+# ✅ Aqui está o segredo: copiar o conteúdo da pasta atual
+COPY --link . /app
 
 RUN pnpm install --frozen-lockfile
 RUN npm run build
