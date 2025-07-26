@@ -15,6 +15,7 @@ COPY --link . /app
 
 RUN pnpm install
 RUN npm run build
+RUN mkdir -p dist && cp agent.js dist/
 
 FROM base
 COPY --from=build /app /app
