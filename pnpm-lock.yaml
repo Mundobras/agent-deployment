@@ -1,5 +1,0 @@
-lockfileVersion: '6.0'
-dependencies:
-  '@livekit/agent':
-    specifier: ^0.0.7
-    version: 0.0.7
